@@ -30,3 +30,13 @@ used when arrays are very large)
 
 Dependent Variable:
 impl__power__total_power
+
+
+
+
+
+
+
+
+
+source venv/bin/activate
