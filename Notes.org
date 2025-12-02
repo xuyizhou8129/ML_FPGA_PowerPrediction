@@ -1,0 +1,32 @@
+Data Source: https://github.com/UT-LCA/ML4Accel-Dataset/blob/main/hls_experiments/data/design_space_v2_transformed.csv
+***Use compiler-estimated execution cost and predicted hardware footprint to predict total power consumption***
+
+Independent Variables:
+hls_synth__latency_best_cycles
+hls_synth__latency_average_cycles
+hls_synth__latency_worst_cycles
+
+hls_synth__resources_lut_used: 
+Lookup Tables as a fundamental hardware resource within a Field-Programmable Gate Array (FPGA)
+
+hls_synth__resources_ff_used:
+Number of flip-flops used
+
+hls_synth__resources_dsp_used:
+Number of DSP blocks used (dedicated arithmetic units in the FPGA)
+dominates dynamic power
+
+hls_synth__resources_bram_used:
+Number of Block RAM used
+(on-chip SRAM blocks
+usually 18Kb or 36Kb
+used for arrays, buffers, FIFOs, and caches)
+
+
+Number of UltraRAM blocks estimated by HLS.
+(URAM is:
+a newer large memory primitive on UltraScale+ FPGAs
+used when arrays are very large)
+
+Dependent Variable:
+impl__power__total_power
