@@ -22,8 +22,8 @@ COLUMNS = [
     "hls_synth__resources_uram_used",
 
     "impl__power__total_power",
-    "impl__power__dynamic_power",
-    "impl__power__static_power",
+    # "impl__power__dynamic_power",
+    # "impl__power__static_power",
 ]
 
 print(f"Loading: {SRC}")
