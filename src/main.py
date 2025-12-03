@@ -1,8 +1,6 @@
 # src/main.py
 
 """
-Entry point for running experiments on the HLS power dataset.
-
 Pipeline:
 1. Load CSV.
 2. Train/test split.
@@ -22,6 +20,7 @@ from preprocessing import (
 )
 from feature_selection import run_linear_feature_selection
 from non_linear_corre import run_nonlinear_boosting
+from plotting_utils import plot_mse_vs_features
 
 # Script is in src/, so go up 1 level to project root
 REPO_ROOT = Path(__file__).resolve().parent.parent
@@ -38,7 +37,8 @@ def main() -> Tuple[float, float]:
         X, y, test_size=0.2, random_state=0
     )
     print(
-        f"Train samples: {X_train.shape[0]}, Test samples: {X_test.shape[0]}"
+        f"Train samples: {X_train.shape[0]}, "
+        f"Test samples: {X_test.shape[0]}"
     )
 
     # 3. Standardize features
@@ -48,16 +48,26 @@ def main() -> Tuple[float, float]:
 
     # 4. Linear boosting feature selection
     print("\n=== Linear Feature-Selection via Boosting ===")
-    lin_model, lin_train_rmse, lin_test_rmse = run_linear_feature_selection(
-        X_train_std,
-        y_train,
-        X_test_std,
-        y_test,
-        feature_names=feature_names,
-        # or a smaller number if you want sparsity
-        max_rounds=len(FEATURE_COLS),
-        verbose=True,
+    lin_model, lin_train_rmse, lin_test_rmse = (
+        run_linear_feature_selection(
+            X_train_std,
+            y_train,
+            X_test_std,
+            y_test,
+            feature_names=feature_names,
+            # or a smaller number if you want sparsity
+            max_rounds=len(FEATURE_COLS),
+            verbose=True,
+        )
     )
+
+    # Plot MSE vs number of features for linear model
+    print(
+        "\n=== Plotting Linear Model: Average MSE vs Number of Features ==="
+    )
+    linear_plot_path = REPO_ROOT / "data" / "linear_avgmse_features.png"
+    linear_plot_path.parent.mkdir(parents=True, exist_ok=True)
+    plot_mse_vs_features(lin_model, save_path=linear_plot_path)
 
     # 5. Nonlinear (quadratic) boosting
     print("\n=== Nonlinear (Quadratic) Boosting ===")
@@ -71,6 +81,14 @@ def main() -> Tuple[float, float]:
         include_interactions=True,
         verbose=True,
     )
+
+    # Plot MSE vs number of features for nonlinear model
+    print(
+        "\n=== Plotting Nonlinear Model: Average MSE vs Number of Features ==="
+    )
+    nonlinear_plot_path = REPO_ROOT / "data" / "nonlinear_avgmse_feature.png"
+    nonlinear_plot_path.parent.mkdir(parents=True, exist_ok=True)
+    plot_mse_vs_features(nl_model, save_path=nonlinear_plot_path)
 
     print("\n=== Summary ===")
     print(

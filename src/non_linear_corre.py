@@ -58,7 +58,7 @@ def run_nonlinear_boosting(
     model = FeatureBoostingRegressor(
         max_rounds=max_rounds, tol=1e-6, verbose=verbose
     )
-    model.fit(X_train_nl, y_train)
+    model.fit(X_train_nl, y_train, X_test_nl, y_test)
 
     train_rmse = model.score_rmse(X_train_nl, y_train)
     test_rmse = model.score_rmse(X_test_nl, y_test)

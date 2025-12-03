@@ -19,8 +19,16 @@ class FeatureBoostingRegressor:
         self.intercept_: float = 0.0
         self.coefs_: Optional[np.ndarray] = None
         self.selected_features_: List[int] = []
+        self.train_mse_history_: List[float] = []
+        self.test_mse_history_: List[float] = []
 
-    def fit(self, X: np.ndarray, y: np.ndarray) -> "FeatureBoostingRegressor":
+    def fit(
+        self,
+        X: np.ndarray,
+        y: np.ndarray,
+        X_test: Optional[np.ndarray] = None,
+        y_test: Optional[np.ndarray] = None,
+    ) -> "FeatureBoostingRegressor":
         N, D = X.shape
         max_rounds = self.max_rounds or D
 
@@ -30,9 +38,18 @@ class FeatureBoostingRegressor:
 
         self.coefs_ = np.zeros(D, dtype=float)
         self.selected_features_ = []
+        self.train_mse_history_ = []
+        self.test_mse_history_ = []
         selected_mask = np.zeros(D, dtype=bool)
 
         prev_mse = np.mean(residual**2)
+
+        # Record initial MSE (0 features, just intercept)
+        self.train_mse_history_.append(prev_mse)
+        if X_test is not None and y_test is not None:
+            test_pred = np.full_like(y_test, self.intercept_)
+            test_mse = np.mean((y_test - test_pred) ** 2)
+            self.test_mse_history_.append(test_mse)
 
         for k in range(max_rounds):
             best_feat = None
@@ -79,6 +96,13 @@ class FeatureBoostingRegressor:
             residual = residual - best_w * x_best
             prev_mse = best_mse
 
+            # Record MSE after adding this feature
+            self.train_mse_history_.append(best_mse)
+            if X_test is not None and y_test is not None:
+                test_pred = self.predict(X_test)
+                test_mse = np.mean((y_test - test_pred) ** 2)
+                self.test_mse_history_.append(test_mse)
+
             if self.verbose:
                 msg = (f"[Round {k}] Added feature {best_feat} with "
                        f"weight {best_w:.6f}, MSE={best_mse:.4f}, "
@@ -122,7 +146,7 @@ def run_linear_feature_selection(
     model = FeatureBoostingRegressor(
         max_rounds=max_rounds, tol=1e-6, verbose=verbose
     )
-    model.fit(X_train, y_train)
+    model.fit(X_train, y_train, X_test, y_test)
 
     train_rmse = model.score_rmse(X_train, y_train)
     test_rmse = model.score_rmse(X_test, y_test)
