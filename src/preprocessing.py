@@ -1,13 +1,5 @@
 # src/preprocessing.py
 
-"""
-Preprocessing utilities for the HLS power dataset.
-
-- load_dataset: read CSV into (X, y, feature_names)
-- train_test_split: manual split into train / test sets
-- standardize: z-score scaling using train statistics only
-"""
-
 from typing import Tuple, List
 import numpy as np
 import pandas as pd
@@ -27,23 +19,6 @@ TARGET_COL: str = "impl__power__total_power"
 
 
 def load_dataset(csv_path: str) -> Tuple[np.ndarray, np.ndarray, List[str]]:
-    """
-    Load the power dataset from a CSV file.
-
-    Parameters
-    ----------
-    csv_path : str
-        Path to the CSV file.
-
-    Returns
-    -------
-    X : np.ndarray, shape (N, D)
-        Feature matrix.
-    y : np.ndarray, shape (N,)
-        Target vector (total power).
-    feature_names : list of str
-        Names of the feature columns in X.
-    """
     df = pd.read_csv(csv_path)
 
     # Basic sanity check: ensure required columns exist
@@ -65,24 +40,6 @@ def train_test_split(
     random_state: int = 0,
     # Seed for the random number generator
 ) -> Tuple[np.ndarray, np.ndarray, np.ndarray, np.ndarray]:
-    """
-    Simple manual train/test split.
-
-    Parameters
-    ----------
-    X : np.ndarray
-        Feature matrix.
-    y : np.ndarray
-        Target vector.
-    test_size : float, optional
-        Fraction of samples to use for testing (default 0.2).
-    random_state : int, optional
-        Seed for the RNG.
-
-    Returns
-    -------
-    X_train, X_test, y_train, y_test
-    """
     assert 0.0 < test_size < 1.0
 
     rng = np.random.RandomState(random_state)
@@ -106,23 +63,7 @@ def standardize(
     X_train: np.ndarray,
     X_test: np.ndarray,
 ) -> Tuple[np.ndarray, np.ndarray, np.ndarray, np.ndarray]:
-    """
-    Standardize features (z-score) using train statistics only.
 
-    Parameters
-    ----------
-    X_train, X_test : np.ndarray
-        Original train and test feature matrices.
-
-    Returns
-    -------
-    X_train_std : np.ndarray
-    X_test_std : np.ndarray
-    mean : np.ndarray
-        Per-feature mean from the train set.
-    std : np.ndarray
-        Per-feature std (with eps to avoid divide-by-zero).
-    """
     mean = X_train.mean(axis=0)
     std = X_train.std(axis=0)
     eps = 1e-12
