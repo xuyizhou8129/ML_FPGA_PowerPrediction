@@ -49,69 +49,6 @@ ML_FPGA_PowerPrediction/
 └── README.md
 ```
 
-## Installation
-
-### Prerequisites
-
-- Python 3.9+
-- pip
-
-### Setup
-
-1. Clone or download this repository
-
-2. Create a virtual environment (recommended):
-```bash
-python3 -m venv venv
-source venv/bin/activate  # On Windows: venv\Scripts\activate
-```
-
-3. Install required packages:
-```bash
-pip install numpy pandas matplotlib
-```
-
-## Usage
-
-### Running the Main Pipeline
-
-Execute the main script to run the complete pipeline:
-
-```bash
-cd src
-python main.py
-```
-
-This will:
-1. Load the dataset from `data/design_space_power_subset.csv`
-2. Split data into training (80%) and test (20%) sets
-3. Standardize features (zero mean, unit variance)
-4. Run linear feature selection with greedy boosting
-5. Generate and save plot: `data/linear_avgmse_features.png`
-6. Run nonlinear (quadratic) feature selection
-7. Generate and save plot: `data/nonlinear_avgmse_feature.png`
-8. Print summary statistics comparing both models
-
-### Algorithm Details
-
-#### Greedy Forward Feature Selection
-
-The algorithm uses a boosting approach:
-
-1. **Initialization**: Start with a constant predictor (mean of target values)
-2. **Feature Selection**: At each round, evaluate all remaining features and select the one that minimizes residual MSE
-3. **Residual Update**: Update residuals by subtracting the selected feature's contribution
-4. **Stopping Criteria**: Stop when no feature improves MSE or improvement is below tolerance
-
-The algorithm is greedy because it makes locally optimal choices at each step without considering future feature interactions.
-
-#### Model Types
-
-- **Linear Model**: Uses original features with linear coefficients
-- **Nonlinear Model**: Expands feature space to include:
-  - Squared terms (x² for each feature)
-  - Interaction terms (xᵢ × xⱼ for all feature pairs)
-
 ## Output
 
 The script generates:
@@ -147,11 +84,3 @@ The script generates:
 
 For detailed analysis and results, see the project report:
 [Overleaf Project](https://www.overleaf.com/project/691162af603b1a669403d144)
-
-## License
-
-This project is part of a course assignment (EE 375, Fall 2025).
-
-## Author
-
-Developed for the Final Project in EE 375 (Fall 2025).
