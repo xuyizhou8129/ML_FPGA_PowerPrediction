@@ -1,4 +1,6 @@
-# ML FPGA Power Prediction
+# Interpretable FPGA Power Estimation Using Greedy Boosting and Quadratic Feature Expansion
+
+**📄 [Full Project Report](https://www.overleaf.com/project/691162af603b1a669403d144)**
 
 Machine learning project for predicting FPGA power consumption using High-Level Synthesis (HLS) synthesis metrics. This project implements greedy forward feature selection with boosting to build linear and nonlinear regression models for power prediction.
 
@@ -14,6 +16,8 @@ This project predicts total power consumption of FPGA implementations based on H
 - **Visualization**: Generates plots showing how average MSE changes with the number of selected features
 
 ## Dataset
+
+**Data Source**: The dataset used in this project is derived from the [ML4Accel-Dataset](https://github.com/UT-LCA/ML4Accel-Dataset), a well-curated open-source dataset for ML-guided chip design developed at UT Austin.
 
 The dataset contains HLS synthesis metrics and power measurements from FPGA implementations:
 
@@ -80,7 +84,3 @@ The script generates:
 - `pandas`: Data manipulation and CSV reading
 - `matplotlib`: Plotting and visualization
 
-## Report
-
-For detailed analysis and results, see the project report:
-[Overleaf Project](https://www.overleaf.com/project/691162af603b1a669403d144)
