@@ -1,0 +1,185 @@
+(venv) xuyizhou@macbookhabi src % python3 main.py
+Loaded dataset: X.shape=(237, 8), y.shape=(237,)
+Train samples: 190, Test samples: 47
+Feature means (train): [2.90859842e+05 4.74908847e+05 1.00438594e+07 4.72612526e+04
+ 1.63961789e+04 4.86526316e+01 4.83578947e+01 0.00000000e+00]
+Feature stds  (train): [5.93497180e+05 1.07167865e+06 5.69637345e+07 9.20804128e+04
+ 1.91958511e+04 9.63402161e+01 9.82334401e+01 1.00000000e+00]
+
+=== Linear Feature-Selection via Boosting ===
+[Round 0] Added feature 5 with weight 181.047994, MSE=8951.4611, improvement=32778.3762
+[Round 1] Added feature 6 with weight 44.464670, MSE=6974.3542, improvement=1977.1069
+[Round 2] Added feature 2 with weight 25.587776, MSE=6319.6200, improvement=654.7343
+[Round 3] Added feature 3 with weight 25.123036, MSE=5688.4530, improvement=631.1669
+[Round 4] Added feature 0 with weight -6.153491, MSE=5650.5875, improvement=37.8655
+[Round 5] Added feature 4 with weight -3.314835, MSE=5639.5994, improvement=10.9881
+[Round 6] Added feature 1 with weight -0.275112, MSE=5639.5237, improvement=0.0757
+[Round 7] No feature improves MSE; stopping.
+
+=== Linear Model Coefficients ===
+Intercept (w₀): 780.670474
+
+All feature coefficients:
+  [✓] 0: hls_synth__latency_best_cycles           w =  -6.153491
+  [✓] 1: hls_synth__latency_average_cycles        w =  -0.275112
+  [✓] 2: hls_synth__latency_worst_cycles          w =  25.587776
+  [✓] 3: hls_synth__resources_lut_used            w =  25.123036
+  [✓] 4: hls_synth__resources_ff_used             w =  -3.314835
+  [✓] 5: hls_synth__resources_dsp_used            w = 181.047994
+  [✓] 6: hls_synth__resources_bram_used           w =  44.464670
+  [ ] 7: hls_synth__resources_uram_used           w =   0.000000
+
+Selected features (in order):
+  5: hls_synth__resources_dsp_used (w=181.047994)
+  6: hls_synth__resources_bram_used (w=44.464670)
+  2: hls_synth__latency_worst_cycles (w=25.587776)
+  3: hls_synth__resources_lut_used (w=25.123036)
+  0: hls_synth__latency_best_cycles (w=-6.153491)
+  4: hls_synth__resources_ff_used (w=-3.314835)
+  1: hls_synth__latency_average_cycles (w=-0.275112)
+
+Linear boosting RMSE - train: 75.097, test: 65.227
+
+Tolerance Accuracy:
+  Train - Within 5%:  56.32%, Within 10%: 85.79%, Within 15%: 92.11%
+  Test  - Within 5%:  55.32%, Within 10%: 85.11%, Within 15%: 93.62%
+
+=== Plotting Linear Model: Average MSE vs Number of Features ===
+Plot saved to: /Users/xuyizhou/Desktop/NU/Class_Work/Fall_2025/EE_375/Final_Project/ML_FPGA_PowerPrediction/data/linear_avgmse_features.png
+
+=== Nonlinear (Quadratic) Boosting ===
+[Round 0] Added feature 5 with weight 181.047994, MSE=8951.4611, improvement=32778.3762
+[Round 1] Added feature 6 with weight 44.464670, MSE=6974.3542, improvement=1977.1069
+[Round 2] Added feature 31 with weight 72.830396, MSE=6038.2607, improvement=936.0936
+[Round 3] Added feature 3 with weight 24.089286, MSE=5457.9670, improvement=580.2937
+[Round 4] Added feature 30 with weight 50.680836, MSE=5077.1455, improvement=380.8214
+[Round 5] Added feature 16 with weight -10.251558, MSE=4835.6192, improvement=241.5264
+[Round 6] Added feature 36 with weight -21.105026, MSE=4716.0734, improvement=119.5458
+[Round 7] Added feature 11 with weight -3.013472, MSE=4635.3674, improvement=80.7060
+[Round 8] Added feature 19 with weight -11.371727, MSE=4553.6369, improvement=81.7305
+[Round 9] Added feature 38 with weight -2.795539, MSE=4500.1400, improvement=53.4969
+[Round 10] Added feature 32 with weight -12.664895, MSE=4457.5713, improvement=42.5688
+[Round 11] Added feature 24 with weight 10.661216, MSE=4425.2179, improvement=32.3533
+[Round 12] Added feature 4 with weight 8.068576, MSE=4360.1160, improvement=65.1019
+[Round 13] Added feature 21 with weight 9.509231, MSE=4321.4654, improvement=38.6506
+[Round 14] Added feature 34 with weight -2.612878, MSE=4280.9020, improvement=40.5634
+[Round 15] Added feature 20 with weight -8.539774, MSE=4247.8222, improvement=33.0799
+[Round 16] Added feature 14 with weight 1.221745, MSE=4222.4332, improvement=25.3890
+[Round 17] Added feature 39 with weight -5.773410, MSE=4179.9473, improvement=42.4859
+[Round 18] Added feature 8 with weight -1.425101, MSE=4162.8687, improvement=17.0785
+[Round 19] Added feature 13 with weight -0.360355, MSE=4155.5192, improvement=7.3496
+[Round 20] Added feature 29 with weight 6.403483, MSE=4149.9385, improvement=5.5807
+[Round 21] Added feature 17 with weight -5.182496, MSE=4143.2491, improvement=6.6893
+[Round 22] Added feature 26 with weight -3.284936, MSE=4139.6738, improvement=3.5753
+[Round 23] Added feature 35 with weight -2.605597, MSE=4137.6460, improvement=2.0278
+[Round 24] Added feature 25 with weight 3.327040, MSE=4133.8035, improvement=3.8424
+[Round 25] Added feature 0 with weight 1.717098, MSE=4130.8551, improvement=2.9484
+[Round 26] Added feature 10 with weight 0.251060, MSE=4128.5987, improvement=2.2564
+[Round 27] Added feature 1 with weight -1.460140, MSE=4126.4667, improvement=2.1320
+[Round 28] Added feature 23 with weight 0.236480, MSE=4125.0782, improvement=1.3885
+[Round 29] Added feature 27 with weight 2.543193, MSE=4122.7141, improvement=2.3642
+[Round 30] Added feature 41 with weight 0.855229, MSE=4121.7839, improvement=0.9302
+[Round 31] Added feature 9 with weight 0.172465, MSE=4121.2553, improvement=0.5286
+[Round 32] Added feature 18 with weight -0.876688, MSE=4120.9802, improvement=0.2751
+[Round 33] Added feature 2 with weight -0.474085, MSE=4120.7554, improvement=0.2248
+[Round 34] Added feature 12 with weight -0.005080, MSE=4120.7553, improvement=0.0002
+[Round 35] No feature improves MSE; stopping.
+
+=== Nonlinear Model Coefficients ===
+Intercept (w₀): 780.670474
+
+All feature coefficients (total: 44 features):
+  [✓]   0: hls_synth__latency_best_cycles                     w =   1.717098
+  [✓]   1: hls_synth__latency_average_cycles                  w =  -1.460140
+  [✓]   2: hls_synth__latency_worst_cycles                    w =  -0.474085
+  [✓]   3: hls_synth__resources_lut_used                      w =  24.089286
+  [✓]   4: hls_synth__resources_ff_used                       w =   8.068576
+  [✓]   5: hls_synth__resources_dsp_used                      w = 181.047994
+  [✓]   6: hls_synth__resources_bram_used                     w =  44.464670
+  [ ]   7: hls_synth__resources_uram_used                     w =   0.000000
+  [✓]   8: hls_synth__latency_best_cycles^2                   w =  -1.425101
+  [✓]   9: hls_synth__latency_average_cycles^2                w =   0.172465
+  [✓]  10: hls_synth__latency_worst_cycles^2                  w =   0.251060
+  [✓]  11: hls_synth__resources_lut_used^2                    w =  -3.013472
+  [✓]  12: hls_synth__resources_ff_used^2                     w =  -0.005080
+  [✓]  13: hls_synth__resources_dsp_used^2                    w =  -0.360355
+  [✓]  14: hls_synth__resources_bram_used^2                   w =   1.221745
+  [ ]  15: hls_synth__resources_uram_used^2                   w =   0.000000
+  [✓]  16: hls_synth__latency_best_cycles*hls_synth__latency_average_cycles w = -10.251558
+  [✓]  17: hls_synth__latency_best_cycles*hls_synth__latency_worst_cycles w =  -5.182496
+  [✓]  18: hls_synth__latency_best_cycles*hls_synth__resources_lut_used w =  -0.876688
+  [✓]  19: hls_synth__latency_best_cycles*hls_synth__resources_ff_used w = -11.371727
+  [✓]  20: hls_synth__latency_best_cycles*hls_synth__resources_dsp_used w =  -8.539774
+  [✓]  21: hls_synth__latency_best_cycles*hls_synth__resources_bram_used w =   9.509231
+  [ ]  22: hls_synth__latency_best_cycles*hls_synth__resources_uram_used w =   0.000000
+  [✓]  23: hls_synth__latency_average_cycles*hls_synth__latency_worst_cycles w =   0.236480
+  [✓]  24: hls_synth__latency_average_cycles*hls_synth__resources_lut_used w =  10.661216
+  [✓]  25: hls_synth__latency_average_cycles*hls_synth__resources_ff_used w =   3.327040
+  [✓]  26: hls_synth__latency_average_cycles*hls_synth__resources_dsp_used w =  -3.284936
+  [✓]  27: hls_synth__latency_average_cycles*hls_synth__resources_bram_used w =   2.543193
+  [ ]  28: hls_synth__latency_average_cycles*hls_synth__resources_uram_used w =   0.000000
+  [✓]  29: hls_synth__latency_worst_cycles*hls_synth__resources_lut_used w =   6.403483
+  [✓]  30: hls_synth__latency_worst_cycles*hls_synth__resources_ff_used w =  50.680836
+  [✓]  31: hls_synth__latency_worst_cycles*hls_synth__resources_dsp_used w =  72.830396
+  [✓]  32: hls_synth__latency_worst_cycles*hls_synth__resources_bram_used w = -12.664895
+  [ ]  33: hls_synth__latency_worst_cycles*hls_synth__resources_uram_used w =   0.000000
+  [✓]  34: hls_synth__resources_lut_used*hls_synth__resources_ff_used w =  -2.612878
+  [✓]  35: hls_synth__resources_lut_used*hls_synth__resources_dsp_used w =  -2.605597
+  [✓]  36: hls_synth__resources_lut_used*hls_synth__resources_bram_used w = -21.105026
+  [ ]  37: hls_synth__resources_lut_used*hls_synth__resources_uram_used w =   0.000000
+  [✓]  38: hls_synth__resources_ff_used*hls_synth__resources_dsp_used w =  -2.795539
+  [✓]  39: hls_synth__resources_ff_used*hls_synth__resources_bram_used w =  -5.773410
+  [ ]  40: hls_synth__resources_ff_used*hls_synth__resources_uram_used w =   0.000000
+  [✓]  41: hls_synth__resources_dsp_used*hls_synth__resources_bram_used w =   0.855229
+  [ ]  42: hls_synth__resources_dsp_used*hls_synth__resources_uram_used w =   0.000000
+  [ ]  43: hls_synth__resources_bram_used*hls_synth__resources_uram_used w =   0.000000
+
+Selected features (in order):
+  5: hls_synth__resources_dsp_used (w=181.047994)
+  6: hls_synth__resources_bram_used (w=44.464670)
+  31: hls_synth__latency_worst_cycles*hls_synth__resources_dsp_used (w=72.830396)
+  3: hls_synth__resources_lut_used (w=24.089286)
+  30: hls_synth__latency_worst_cycles*hls_synth__resources_ff_used (w=50.680836)
+  16: hls_synth__latency_best_cycles*hls_synth__latency_average_cycles (w=-10.251558)
+  36: hls_synth__resources_lut_used*hls_synth__resources_bram_used (w=-21.105026)
+  11: hls_synth__resources_lut_used^2 (w=-3.013472)
+  19: hls_synth__latency_best_cycles*hls_synth__resources_ff_used (w=-11.371727)
+  38: hls_synth__resources_ff_used*hls_synth__resources_dsp_used (w=-2.795539)
+  32: hls_synth__latency_worst_cycles*hls_synth__resources_bram_used (w=-12.664895)
+  24: hls_synth__latency_average_cycles*hls_synth__resources_lut_used (w=10.661216)
+  4: hls_synth__resources_ff_used (w=8.068576)
+  21: hls_synth__latency_best_cycles*hls_synth__resources_bram_used (w=9.509231)
+  34: hls_synth__resources_lut_used*hls_synth__resources_ff_used (w=-2.612878)
+  20: hls_synth__latency_best_cycles*hls_synth__resources_dsp_used (w=-8.539774)
+  14: hls_synth__resources_bram_used^2 (w=1.221745)
+  39: hls_synth__resources_ff_used*hls_synth__resources_bram_used (w=-5.773410)
+  8: hls_synth__latency_best_cycles^2 (w=-1.425101)
+  13: hls_synth__resources_dsp_used^2 (w=-0.360355)
+  29: hls_synth__latency_worst_cycles*hls_synth__resources_lut_used (w=6.403483)
+  17: hls_synth__latency_best_cycles*hls_synth__latency_worst_cycles (w=-5.182496)
+  26: hls_synth__latency_average_cycles*hls_synth__resources_dsp_used (w=-3.284936)
+  35: hls_synth__resources_lut_used*hls_synth__resources_dsp_used (w=-2.605597)
+  25: hls_synth__latency_average_cycles*hls_synth__resources_ff_used (w=3.327040)
+  0: hls_synth__latency_best_cycles (w=1.717098)
+  10: hls_synth__latency_worst_cycles^2 (w=0.251060)
+  1: hls_synth__latency_average_cycles (w=-1.460140)
+  23: hls_synth__latency_average_cycles*hls_synth__latency_worst_cycles (w=0.236480)
+  27: hls_synth__latency_average_cycles*hls_synth__resources_bram_used (w=2.543193)
+  41: hls_synth__resources_dsp_used*hls_synth__resources_bram_used (w=0.855229)
+  9: hls_synth__latency_average_cycles^2 (w=0.172465)
+  18: hls_synth__latency_best_cycles*hls_synth__resources_lut_used (w=-0.876688)
+  2: hls_synth__latency_worst_cycles (w=-0.474085)
+  12: hls_synth__resources_ff_used^2 (w=-0.005080)
+
+Nonlinear boosting RMSE - train: 64.193, test: 52.547
+
+Tolerance Accuracy:
+  Train - Within 5%:  69.47%, Within 10%: 91.05%, Within 15%: 93.68%
+  Test  - Within 5%:  72.34%, Within 10%: 87.23%, Within 15%: 97.87%
+
+=== Plotting Nonlinear Model: Average MSE vs Number of Features ===
+Plot saved to: /Users/xuyizhou/Desktop/NU/Class_Work/Fall_2025/EE_375/Final_Project/ML_FPGA_PowerPrediction/data/nonlinear_avgmse_feature.png
+
+=== Summary ===
+Linear  RMSE: train=75.097, test=65.227
+Nonlin  RMSE: train=64.193, test=52.547
