@@ -1,9 +1,12 @@
 import pandas as pd
 from pathlib import Path
 
-# ==== CONFIGURATION ====
-# Script is in ML_FPGA_PowerPrediction/extract_power_features/,
-# so go up 2 levels to project root
+"""
+This script is used to extract the power features
+from the original dataset(ML4Accel-Dataset),
+and save the subsetted dataset to the data directory.
+"""
+
 REPO_ROOT = Path(__file__).resolve().parents[2]
 SRC = (REPO_ROOT / "ML4Accel_Dataset" / "ML4Accel-Dataset" /
        "hls_experiments" / "data" / "design_space_v2_transformed.csv")
