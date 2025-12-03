@@ -1,6 +1,6 @@
 # Interpretable FPGA Power Estimation Using Greedy Boosting and Quadratic Feature Expansion
 
-**📄 [Full Project Report](https://www.overleaf.com/project/691162af603b1a669403d144)**
+** [Full Project Report](https://www.overleaf.com/project/691162af603b1a669403d144)**
 
 Machine learning project for predicting FPGA power consumption using High-Level Synthesis (HLS) synthesis metrics. This project implements greedy forward feature selection with boosting to build linear and nonlinear regression models for power prediction.
 
